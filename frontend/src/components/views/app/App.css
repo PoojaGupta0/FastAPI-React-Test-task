@@ -1,0 +1,140 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,700&display=swap');
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.Travel-wrapper {
+  background-color: #e4f9ff;
+  width: 100%;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+.Travel-wrapper .container {
+  max-width: 1200px;
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+}
+.Travel-wrapper .row {
+  display: flex;
+  width: 100%;
+  gap: 3%;
+  padding: 100px 0;
+
+}
+.Travel-wrapper .Travel-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 46%;
+  max-width: 50%;
+  padding: 15px;
+  background: #fff;
+  border-radius: 10px;
+}
+.Travel-wrapper .Travel-title {
+  font-size: 36px;
+  padding: 15px;
+  background-color: skyblue;
+  color: #fff;
+  font-weight: 700;
+}
+.Travel-wrapper .Travel-card .Travel-card-title {
+  font-size: 18px;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-weight: 700;
+
+}
+.Travel-wrapper .Travel-card label {
+  width: 100%;
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  font-weight: 500;
+
+}
+
+.Travel-wrapper .Travel-card input {
+  padding: 12px;
+  border: 1px solid #d1d1d1;
+  width: calc(100% - 30px);
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-weight: 400;
+}
+.Travel-wrapper .Travel-card .getbtn {
+  border-radius: 5px;
+  width: 100%;
+  padding: 15px;
+  border: 0;
+  background: skyblue;
+  font-size: 18px;
+  font-weight: 700;
+
+}
+.Travel-wrapper .Travel-card .output-card {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.Travel-wrapper .Travel-card .output-card p {
+  text-align: left;
+  width: 50%;
+  font-weight: 400;
+}
+
+.Travel-wrapper .Travel-card .recomd
+{
+  list-style: disc;
+  text-align: left;
+  line-height: 2;
+  font-weight: 400;
+
+}
+
+.Travel-wrapper .Travel-card .my-3 {
+  margin: 15px 0 !important;
+}
+.Travel-card .divider {
+  border-bottom: 1px solid #d1d1d1;
+    min-height: 1px;
+    display: block;
+    width: 100%;
+    border-width: 0 0 1px 0;
+}
