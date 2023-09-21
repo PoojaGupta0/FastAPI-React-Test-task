@@ -3,7 +3,7 @@ import React from 'react';
 const TravelRecommendations = ({ data }) => {
   return (
     <div className='Travel-card'>
-      <h2 className='Travel-card-title'>Travel Recommendations</h2>
+      <h2 className='Travel-card-title'>Travel Recommendations Result</h2>
       <div className='output-card'>
       <p>
         <strong>Country:</strong> {data.country}

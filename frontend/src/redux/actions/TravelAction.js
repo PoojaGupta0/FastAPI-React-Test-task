@@ -1,5 +1,5 @@
 import * as ActionTypes from "./ActionTypes";
-import { apiCall } from "../../Utils/Utils";
+import { apiCall, handleError } from "../../Utils/Utils";
 import Globals from "../../Global";
 import { toast } from "react-toastify";
 // handle loader when api started to call
@@ -39,6 +39,7 @@ export const fetchTravelRecommendation = data => async dispatch => {
     if (apiResponse !== undefined && apiResponse.status === 200) {
       dispatch(travelRecommendationSuccess(apiResponse.data));
     } else {
+      handleError(apiResponse,dispatch) 
       dispatch(travelRecommendationError());
     }
   } catch (error) {

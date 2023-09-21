@@ -121,11 +121,15 @@
 
 .Travel-wrapper .Travel-card .recomd
 {
-  list-style: disc;
+  /* list-style: disc; */
   text-align: left;
   line-height: 2;
   font-weight: 400;
 
+}
+
+.selectStyle {
+ padding-bottom: 20px;
 }
 
 .Travel-wrapper .Travel-card .my-3 {
