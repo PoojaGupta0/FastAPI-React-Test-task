@@ -30,7 +30,6 @@ export async function apiCall(url = "", method = "", data = {}) {
     const response = await axios(apiDetail);
     return await response;
   } catch (err) {
-    console.log(err.response, "Error while calling api");
       return err?.response;
   }
 }
@@ -41,7 +40,7 @@ export const handleError = (apiResponse,dispatch) => {
         return toast.error(Global.errorMsg);
       }
       else{
-        return toast.error(apiResponse.data)
+        return toast.error(apiResponse.data.detail)
       }
     }
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { fetchTravelRecommendation } from '../../../redux/actions/TravelAction';
 import Select from 'react-select';
 
@@ -8,6 +8,8 @@ const TravelForm = ({ dispatch }) => {
     country: '',
     season: '',
   });
+  const [countryPatternError, setCountryPatternError] = useState(false);
+  const [seasonError, setSeasonError] = useState(false);
   const [selectedValue, setSelectedValue] = useState(null);
   const handleSelectChange = (selectedOption) => {
     // Handle the change of the Select component separately
@@ -37,7 +39,7 @@ const TravelForm = ({ dispatch }) => {
       <h2 className='Travel-card-title'>Travel Recommendations</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="country">Country:</label>
+          <label htmlFor="country">Country*:</label>
           <input
             type="text"
             id="country"
@@ -47,10 +49,14 @@ const TravelForm = ({ dispatch }) => {
             placeholder="Enter country..."
             pattern="[A-Za-z]+" // Only allows letters (no spaces)
             required
+            onInvalid={() => setCountryPatternError(true)} // Set error state on pattern mismatch
           />
+          {countryPatternError && (
+            <span className="error-message">Please enter a valid country name.</span>
+          )}
         </div>
         <div>
-          <label htmlFor="season">Season:</label>
+          <label htmlFor="season">Season*:</label>
           <Select
             className='selectStyle'
             id='season'
@@ -59,7 +65,12 @@ const TravelForm = ({ dispatch }) => {
             onChange={handleSelectChange}
             options={seasonOptions}
             required
+            pattern="^\w+$"
+            onInvalid={() => setSeasonError(true)}
           />
+          {seasonError && (
+            <span className="error-message">Please select a valid season name.</span>
+          )}
         </div>
         <div>
           <button type="submit" className='getbtn'>Get Recommendations</button>
