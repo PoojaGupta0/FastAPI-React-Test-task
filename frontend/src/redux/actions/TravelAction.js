@@ -10,7 +10,6 @@ export const travelRecommendationInit = () => {
 };
 //handle success of api
 export const travelRecommendationSuccess = val => {
-  // debugger
   return {
     type: ActionTypes.FETCH_TRAVEL_RECOMMENDATIONS_SUCCESS,
     data: val
@@ -31,7 +30,6 @@ export const travelRecommendationError = () => {
 export const fetchTravelRecommendation = data => async dispatch => {
   try {
     dispatch(travelRecommendationInit());
-    // debugger
     const apiResponse = await apiCall(
       `${Globals.API_ROOT_URL}travel/recomendations?country=${data.country}&season=${data.season}`,
       "GET",

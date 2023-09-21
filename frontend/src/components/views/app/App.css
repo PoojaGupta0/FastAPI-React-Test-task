@@ -88,6 +88,12 @@
   font-weight: 500;
 
 }
+.Travel-wrapper .Travel-card .error-message {
+  color: red; /* Set the text color to red */
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: left;
+}
 
 .Travel-wrapper .Travel-card input {
   padding: 12px;
