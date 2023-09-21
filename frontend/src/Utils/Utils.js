@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import Global from '../Global';
+
 /**
  * @author Pooja
  * @use handle axios api call
@@ -28,14 +31,17 @@ export async function apiCall(url = "", method = "", data = {}) {
     return await response;
   } catch (err) {
     console.log(err.response, "Error while calling api");
-    if (
-      err.response !== undefined && err.response.status === 401
-    ) {
-      // localStorage.removeItem("auth_token");
-      // history.push("/login");
-
-
-    }
       return err?.response;
   }
+}
+
+export const handleError = (apiResponse,dispatch) => {
+    if (apiResponse) {
+      if(apiResponse.status === 500){
+        return toast.error(Global.errorMsg);
+      }
+      else{
+        return toast.error(apiResponse.data)
+      }
+    }
 }

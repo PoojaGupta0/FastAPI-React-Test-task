@@ -1,7 +1,8 @@
 import os, json, openai
 
 from fastapi import HTTPException, Depends, Query
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, ValidationError, validator
+from utils.utils import remove_numbers_bullet_points
 
 # Your OpenAI API key
 api_key = os.environ.get("open_ai_key")
@@ -24,11 +25,6 @@ class HomeView:
         country = query_params.country
         season = query_params.season
 
-        # Check if the season is valid
-        valid_seasons = {"fall", "summer", "winter", "spring"}
-        if season.lower() not in valid_seasons:
-            raise HTTPException(status_code=400, detail="Season is invalid")
-
         # Define the prompt/question
         prompt = f"Three recommended activities for someone traveling to {country} in {season}."
 
@@ -43,7 +39,7 @@ class HomeView:
 
             # Extract and format the recommendations from the response
             recommendations = response.choices[0].text.strip().replace("\n", "\n")
-
+            # recommend = remove_numbers_bullet_points(recommendations)
             return {
                 "season": season,
                 "country": country,
