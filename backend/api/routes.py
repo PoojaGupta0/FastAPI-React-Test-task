@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from backend.api.views import home_view
+from api.views import home_view
 
 api_router = APIRouter()
 

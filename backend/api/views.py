@@ -4,8 +4,8 @@ import requests.exceptions
 from fastapi import HTTPException, Depends
 from pydantic import ValidationError
 
-from backend.api.models import QueryParams
-from backend.utils.utils import remove_numbers_bullet_points
+from api.models import QueryParams
+from utils.utils import remove_numbers_bullet_points
 
 # Your OpenAI API key
 openai_api_key = os.environ.get("open_ai_key")
