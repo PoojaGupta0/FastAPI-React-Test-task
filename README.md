@@ -114,7 +114,7 @@ open_ai_key=your_open_ai_key
 2. Checkout to this below branch:
 
    ```bash
-   git checkout develop-pooja
+   git checkout main
    ```
 
 3. Build Docker images for the services defined in your Docker Compose configuration:
