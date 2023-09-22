@@ -1,26 +1,26 @@
 import os, json, openai
-
-from fastapi import HTTPException, Depends, Query
-from pydantic import BaseModel, ValidationError
-from utils.utils import remove_numbers_bullet_points
 import requests.exceptions
+
+from fastapi import HTTPException, Depends
+from pydantic import ValidationError
+
+from backend.api.models import QueryParams
+from backend.utils.utils import remove_numbers_bullet_points
 
 # Your OpenAI API key
 openai_api_key = os.environ.get("open_ai_key")
 
 
-# Define a Pydantic model for query parameters
-class QueryParams(BaseModel):
-    country: str = Query(
-        ..., description="Country name is required", min_length=4, max_length=50
-    )
-    season: str = Query(
-        ..., description="Season is required", min_length=4, max_length=20
-    )
-
 class HomeView:
     def get_recommendations(self, country, season):
-            # Define the prompt/question
+        """sumary_line
+
+        Keyword arguments:
+        argument -- country, season
+        Return: Get the travel recommendations from Open AI
+        """
+
+        # Define the prompt/question
         prompt = f"Three recommended activities for someone traveling to {country} in {season}."
 
         # Make a request to the OpenAI API
@@ -37,33 +37,48 @@ class HomeView:
             return recommendations
 
         except openai.error.RateLimitError as e:
-            raise HTTPException(status_code=429, detail=f"Rate limit exceeded. Retry after 3 seconds")
+            raise HTTPException(
+                status_code=429, detail=f"Rate limit exceeded. Retry after 3 seconds"
+            )
 
         except requests.exceptions.Timeout:
-            raise HTTPException(status_code=504, detail=f"Request to OpenAI API timed out. Please try again later.")
+            raise HTTPException(
+                status_code=504,
+                detail=f"Request to OpenAI API timed out. Please try again later.",
+            )
 
         except openai.error.OpenAIError as e:
             raise HTTPException(status_code=400, detail=str(e))
 
     def get(self, query_params: QueryParams = Depends()):
+        """sumary_line
+
+        Keyword arguments:
+        argument -- QueryParams
+        Return: Get the recommendations with the expected format
+        """
+
         country = query_params.country
         season = query_params.season
 
         try:
+            # Call the get recommendation function for getting the results
             recommendations = self.get_recommendations(country, season)
+            # Modified the recommendation to remove numbers, bullets and other things to get result in list
             recommendations = remove_numbers_bullet_points(recommendations)
 
             return {
                 "season": season,
                 "country": country.title(),
-                "recommendations": recommendations
+                "recommendations": recommendations,
             }
-
+        # Handle the exceptions
         except (SyntaxError, ValueError, ValidationError) as e:
             raise HTTPException(status_code=400, detail=str(e))
 
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
 
 # Instantiate HomeView class
 home_view = HomeView()
