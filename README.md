@@ -128,5 +128,11 @@ open_ai_key=your_open_ai_key
    ```bash
    sudo docker-compose up -d
    ```
+
+# Additional Info
+
+Frontend is running on `http://localhost:3000/`
+
+for checking backend API - `http://localhost:8000/docs`
    
 
