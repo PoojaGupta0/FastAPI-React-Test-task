@@ -18,7 +18,7 @@ const TravelForm = ({ dispatch }) => {
 
   const seasonOptions = [
     { value: "summer", label: "Summer" },
-    { value: "Spring", label: "Spring" },
+    { value: "spring", label: "Spring" },
     { value: "fall", label: "Fall" },
     { value: "winter", label: "Winter" }
   ]

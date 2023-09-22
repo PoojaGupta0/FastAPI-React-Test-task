@@ -49,6 +49,14 @@ class HomeView:
 
         except openai.error.OpenAIError as e:
             raise HTTPException(status_code=400, detail=str(e))
+        
+        # Handle the exceptions
+        except (SyntaxError, ValueError, ValidationError) as e:
+            raise HTTPException(status_code=400, detail=str(e))
+
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
 
     def get(self, query_params: QueryParams = Depends()):
         """sumary_line
@@ -60,24 +68,16 @@ class HomeView:
 
         country = query_params.country
         season = query_params.season
+        # Call the get recommendation function for getting the results
+        recommendations = self.get_recommendations(country, season)
+        # Modified the recommendation to remove numbers, bullets and other things to get result in list
+        recommendations = remove_numbers_bullet_points(recommendations) if recommendations else []
 
-        try:
-            # Call the get recommendation function for getting the results
-            recommendations = self.get_recommendations(country, season)
-            # Modified the recommendation to remove numbers, bullets and other things to get result in list
-            recommendations = remove_numbers_bullet_points(recommendations)
-
-            return {
-                "season": season,
-                "country": country.title(),
-                "recommendations": recommendations,
-            }
-        # Handle the exceptions
-        except (SyntaxError, ValueError, ValidationError) as e:
-            raise HTTPException(status_code=400, detail=str(e))
-
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+        return {
+            "season": season,
+            "country": country.title(),
+            "recommendations": recommendations,
+        }
 
 
 # Instantiate HomeView class
